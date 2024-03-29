@@ -6,34 +6,19 @@
 	// 로그인
 	// diary.login.my_session  => "OFF" -> redirect loginForm.jsp
 	// 
-	String Sql1 = "select my_session mySession from login";
+	String loginMember = (String)(session.getAttribute("loginMember"));
+	if(loginMember == null){
+		String errMsg = URLEncoder.encode("잘못된 접근입니다. 로그인 먼저 해주세요.", "utf-8");
+		response.sendRedirect("/diary/loginForm.jsp?errMsg=" +errMsg);
+		return;
+	}
+%>
+<%
 	Class.forName("org.mariadb.jdbc.Driver");
-	
 	Connection conn = null;
-	PreparedStatement stmt1 = null;
-	ResultSet rs1 = null;
 	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary", "root", "java1234");
-	stmt1 = conn.prepareStatement(Sql1);
-	rs1 = stmt1.executeQuery();
-	String mySession = null;
-	if(rs1.next()){
-		mySession = rs1.getString("mySession");
-	}
-	System.out.println("mySession: " + mySession);
-	if(mySession.equals("off")) {
-		String errMsg = URLEncoder.encode("잘못된 접근입니다. 로그인 부터 해주세요." ,"utf-8");
-		response.sendRedirect("/diary/loginForm.jsp?errMsg=" + errMsg); 
-		 return;	// 코드 끝냄.
-	}
-/* 	String diary_date = request.getParameter("diary_date");
-	String sql2 = "select diary_date, title, weather, content, update_date, create_date from diary";
-	PreparedStatement stmt2 = null;
-	ResultSet rs2 = null;
-	stmt2 = conn.prepareStatement(sql2);
-	rs2= stmt2.executeQuery(); */
 	
-	
-	// 달력
+	// 달력 page
 	// 1. 요청-> 출력하고자는 달력 년과 월값
 	String targetYear = request.getParameter("targetYear");
 	String targetMonth = request.getParameter("targetMonth");
@@ -61,6 +46,7 @@
 	int startBlank = yoNum - 1;
 	int lastDate = target.getActualMaximum(Calendar.DATE);	// 마지막 날
 	int countDiv = startBlank + lastDate;
+	
 	
 	// tYear 와 tMonth에 해당되는 diary목록을 출력
 	String sql2 = "select diary_date, day(diary_date) day, feeling, left(title,5) title from diary where year(diary_date) =? and month(diary_date) =?"; // 다이어리 year, month 데이터값 가져오기
@@ -164,6 +150,8 @@
 		<button class="btn btn-warning"><a href="/diary/logout.jsp">로그아웃</a></button>	
 		<button class="btn btn-warning"><a href="/diary/addDiaryForm.jsp">글쓰기</a></button>	
 		<button class="btn btn-warning"><a href="/diary/diaryList.jsp">다이어리 리스트</a></button>
+		<button class="btn btn-warning"><a href="/diary/statsLunch.jsp">오늘점심뭐먹지?</a></button>
+		
 	</div>
 	
 	<h1 style="color: #F361DC" class="head">

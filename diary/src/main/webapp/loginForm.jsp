@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*"%>
 <%
-	// 로그인
+	// 로그인 db
 	// diary.login.my_session  => "OFF" -> redirect loginForm.jsp
 	// 
-	String loginSql1 = "select my_session mySession from login";
+/* 	String loginSql1 = "select my_session mySession from login";
 	Class.forName("org.mariadb.jdbc.Driver");
 	Connection conn = null;
 	PreparedStatement stmt1 = null;
@@ -12,15 +12,27 @@
 	conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/diary", "root", "java1234");
 	stmt1 = conn.prepareStatement(loginSql1); 
 	rs1 = stmt1.executeQuery();
-	String mySession = null;
+	String mySession = null; 
 	if(rs1.next()){
 		mySession = rs1.getString("mySession");
 	}
 	if(mySession.equals("on")) {
 		response.sendRedirect("/diary/diary.jsp");
 		return;	// 코드 끝냄.
-	}
+	}*/
 	
+	// 로그인 분기 session 사용
+	// 로그인 성공시 세션에 loginMember 변수 생성 후 값으로 로그인 아이디 저장
+	String loginMember = (String)session.getAttribute("loginMember");
+	//session.getAttribute() 찾는 변수 없므녀 null 반환.
+	// null 이면 로그아웃상태  null이 아니면 로그인상태 
+	System.out.println("loginMember: " + loginMember);
+	
+	// loginForm 로그아웃 상태에서만 나옴.
+	if(loginMember != null) {
+		response.sendRedirect("/diary/diary.jsp");
+		return;
+	}
 	// if문에 안 걸릴 때
 	
 	// 요청값 분석
