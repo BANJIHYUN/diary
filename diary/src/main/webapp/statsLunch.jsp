@@ -77,6 +77,9 @@
   		.center {
   			 text-align: center;
   		}
+  		.table_center {
+  			margin:auto; 
+  		}
 	</style>
 </head>
 <body class="a">
@@ -91,7 +94,7 @@
 							<span><%=msg%></span>
 						</div>
 					<br>
-						<button type="submit" class="btn btn-outline-warning">가능한 날짜인지 확인</button>	 &nbsp; <%-- checkDate : <%=checkDate%> / ck : <%=ck%>	&nbsp; --%>
+						<div class="center"><button type="submit" class="btn btn-outline-warning">가능한 날짜인지 확인</button> &nbsp; <%-- checkDate : <%=checkDate%> / ck : <%=ck%>	&nbsp; --%>
 						<% 
 							if(ck.equals("T")){
 							msg = "입력이 가능한 날짜입니다.";
@@ -100,6 +103,7 @@
 						<%
 							}
 						%>
+						</div>	
 					</form>
 					<hr>
 				<h1 class="center">&#129528;통계&#129528;</h1>
@@ -114,7 +118,7 @@
 			<div class="center">
 				전체 투표수: <%=(int)totalCnt%>
 			</div>
-			<table border="1" style="width: 400px;" class="center">
+			<table style="width: 400px;" class="center table_center">
 				<tr>
 				
 				<%

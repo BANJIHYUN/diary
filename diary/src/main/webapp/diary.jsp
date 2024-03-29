@@ -5,7 +5,6 @@
 <%
 	// 로그인
 	// diary.login.my_session  => "OFF" -> redirect loginForm.jsp
-	// 
 	String loginMember = (String)(session.getAttribute("loginMember"));
 	if(loginMember == null){
 		String errMsg = URLEncoder.encode("잘못된 접근입니다. 로그인 먼저 해주세요.", "utf-8");

@@ -27,51 +27,6 @@
 		return;	// 코드 끝냄.
 	}
 %>
-<%-- <%
-	// checkDate
-	String checkDate = request.getParameter("checkDate");
-	System.out.println("checkDate: " + checkDate);
-	if(checkDate == null){
-		checkDate = "";
-	}
-	String ck = request.getParameter("ck");
-	System.out.println("ck: " + ck);
-	if(ck == null) {
-		ck = "";
-	}
-	
-	String msg = "";
-	if(ck.equals("T")){
-		msg = "입력이 가능한 날짜입니다.";
-	} else if(ck.equals("F")){		
-		msg = "점심 투표를 이미 진행했습니다.";
-	}
-%>  --%>
-<%-- <%
-	/* 점심 투표 */
-	String lunch_date = request.getParameter("lunch_date");
-	String menu = request.getParameter("menu");
-	
-	System.out.println("lunch_date: " + lunch_date);
-	System.out.println("menu: " + menu);
-	
-	String sql3 = "insert into lunch(lunch_date, menu, update_date, create_date) values(?, ?, Now(), NOW())";
-	PreparedStatement stmt3 = null;
-	stmt3 = conn.prepareStatement(sql3); 
-	
-	stmt3.setString(1, lunch_date);
-	stmt3.setString(2, menu);
-	
-	int row = 0;
-	
-	if(row == 0) {
-		System.out.println("입력 성공");
-		response.sendRedirect("/diary/lunchOne.jsp");
-	} else{
-		System.out.println("입력 실패");
-	}
-	
-%> --%>
 
 <%
  	String lunch_date = request.getParameter("lunch_date");

@@ -44,6 +44,6 @@
 
     }
 
-    response.sendRedirect("/diary/lunchOne.jsp?checkDate=" + checkDate+"&lunch_date="+lunch_date+"&menu="+URLEncoder.encode(dbMenu,"utf-8"));
+    response.sendRedirect("/diary/lunchOne.jsp?checkDate=" + checkDate+ "&lunch_date="+lunch_date+ "&menu="+URLEncoder.encode(dbMenu,"utf-8"));
 
 %>

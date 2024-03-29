@@ -6,7 +6,6 @@
 
 	//디버깅
 	System.out.println("diary_date" + diary_date);
-	
 	//
 	String sql = "select diary_date, title, weather, content from diary where diary_date=?";
 	Class.forName("org.mariadb.jdbc.Driver");
@@ -15,6 +14,16 @@
 	ResultSet rs1 = null;
 	stmt1.setString(1, diary_date);
 	rs1 = stmt1.executeQuery();
+%>
+
+<%
+	String sql3 = "select * from diary where diary_date =?";
+	PreparedStatement stmt3 = conn.prepareStatement(sql3);
+	stmt3.setString(1, diary_date);
+	System.out.println(stmt3);
+	ResultSet rs3 = null;
+	rs3 = stmt3.executeQuery();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -61,10 +70,41 @@
 					<a href="/diary/updateDiaryForm.jsp?diary_date=<%=diary_date%>" class="btn btn-info">수정</a>
 					<a href="/diary/deleteDiary.jsp?diary_date=<%=diary_date%>" class="btn btn-danger">삭제</a>
 					<a href="/diary/diary.jsp" class="btn btn-info">취소</a>
+					<div>
+					<br>
+					<div>댓글입력</div>
+						<form method="post" action="/diary/addCommentAction.jsp">
+							<input type="hidden" name="diary_date" value="<%=diary_date%>">		
+							<textarea rows="2" cols="50" name="memo"></textarea>
+							<button type="submit">입력</button>
+						</form>
+					</div>
+					<!-- 댓글 리스트 -->
+					<%
+						String sql2 = "select comment_no, diary_date, memo, update_date, create_date from comment where diary_date=?";
+						PreparedStatement stmt2 = null;
+						ResultSet rs2 = null;		
+						stmt2 = conn.prepareStatement(sql2);
+						stmt2.setString(1, diary_date);
+						rs2 = stmt2.executeQuery();
+					%>
+			
+					 <table border="1">
+						<%
+							while(rs2.next()){
+								System.out.println(rs2.getString("memo"));
+						%>
+						<tr>
+							<td><%=rs2.getString("memo")%></td>
+							<td><%=rs2.getString("create_date")%></td>
+							<td><a href='/diary/deleteComment.jsp?diary_date=<%=diary_date%>&comment_no=<%=rs2.getInt("comment_no")%>'>삭제</a></td>
+						</tr>
+						<%
+							}
+						%>
+					</table>
 				</div>
 			<div class="col"></div>
-			<div>
-			</div>
 		</div>
 	</div>
 	
