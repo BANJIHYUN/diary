@@ -37,13 +37,20 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet">
 	<style>
-		*{ font-family: "Playpen Sans", cursive;
-  		   font-family: "Bagel Fat One", system-ui;
+		*{
+  			 font-family: 'NanumSquare', sans-serif;
+  			 font-weight: 800;
   		}
 		body{
 			background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
 		}
-  		
+		.text {
+			border-radius: 10px;
+			border-color: skyblue;
+		}
+  		a {
+			text-decoration: none;
+		}
 	</style>
 </head>
 <body>
@@ -62,7 +69,7 @@
 						<div>title:&nbsp; <%=rs1.getString("title")%></div><br>
 						<div>weather:&nbsp; <%=rs1.getString("weather")%></div><br>
 						<div>content<br> 
-							<textarea rows="7" cols="50" name = "content" class="btn btn-outline-info"><%=rs1.getString("content")%></textarea>
+							<textarea rows="7" cols="50" name = "content" class="text"><%=rs1.getString("content")%></textarea>
 						</div><br>
 					<%
 						}	
@@ -75,10 +82,12 @@
 					<div>댓글입력</div>
 						<form method="post" action="/diary/addCommentAction.jsp">
 							<input type="hidden" name="diary_date" value="<%=diary_date%>">		
-							<textarea rows="2" cols="50" name="memo"></textarea>
-							<button type="submit">입력</button>
+							<textarea rows="5" cols="50" name="memo" class="text"></textarea><br>
+							<button type="submit" class="btn btn-info">입력</button>
 						</form>
 					</div>
+					<hr>
+					<h2>댓글 리스트</h2><br>
 					<!-- 댓글 리스트 -->
 					<%
 						String sql2 = "select comment_no, diary_date, memo, update_date, create_date from comment where diary_date=?";
@@ -88,21 +97,25 @@
 						stmt2.setString(1, diary_date);
 						rs2 = stmt2.executeQuery();
 					%>
-			
-					 <table border="1">
+					 <div>
 						<%
 							while(rs2.next()){
 								System.out.println(rs2.getString("memo"));
 						%>
-						<tr>
-							<td><%=rs2.getString("memo")%></td>
-							<td><%=rs2.getString("create_date")%></td>
-							<td><a href='/diary/deleteComment.jsp?diary_date=<%=diary_date%>&comment_no=<%=rs2.getInt("comment_no")%>'>삭제</a></td>
-						</tr>
+							<table border="1" class="text">
+							<tr>
+								<td>내용: <%=rs2.getString("memo")%><td>
+							<tr>	
+							<tr>		
+								<td>작성 날짜(시간): <%=rs2.getString("create_date")%><td>
+							</tr>
+							</table>
+							<br><div class="a btn btn-info"><a href='/diary/deleteComment.jsp?diary_date=<%=diary_date%>&comment_no=<%=rs2.getInt("comment_no")%>'>삭제</a><br></div>
+						<hr>
 						<%
 							}
 						%>
-					</table>
+					</div>	
 				</div>
 			<div class="col"></div>
 		</div>

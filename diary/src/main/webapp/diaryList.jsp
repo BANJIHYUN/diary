@@ -108,7 +108,7 @@
 		*{
   		 font-family: "Playpen Sans", cursive;
   		  font-family: "Bagel Fat One", system-ui;
-  		
+  		}
 	</style>
 
 </head>

@@ -2,6 +2,7 @@
 <%@ page import = "java.sql.*"%>
 <%@ page import= "java.net.URLEncoder"%>
 <%@ page import = "java.util.Calendar"%>
+﻿
 <%
 	// 로그인
 	// diary.login.my_session  => "OFF" -> redirect loginForm.jsp
@@ -69,14 +70,25 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css">
+	
 	<style>
+	@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+/* 	  	*{
+  			 font-family: 'NanumSquare', sans-serif;
+  			 font-weight: 800;
+  		} */
+  		*{
+  		 font-family: "Playpen Sans", cursive;
+  		  font-family: "Bagel Fat One", system-ui;
+  		}
 		/* 달력 */
 		.cell {	
-			width: 180px; height: 60px;
+			width: 100px; height: 80px;
 			float: left;
 			background-color: #E0FFDB;
 			color: black;
-			text-align:center;
+			text-align:right;
 			border: 1px solid #3DB7CC;
 			border-radius: 5px;
 			
@@ -98,66 +110,82 @@
 		}
 		.yo {
 			float: left;
-			width: 170px; height: 20px;
+			width: 90px; height: 20px;
 			margin: 5px;
 			text-align: center;
-			font-weight: bold;
 		}
 		a {
 			text-decoration: none;
 		}
 
-		.h {
-			color: #E4F7BA;
-		}
-		.q {
+  		.diary_center {
+  			display: inline-block;
+			vertical-align: middle;
+			color: black;
+			margin: 0.5rem;
+			padding: 0;
+			text-align:center;
+  		}
+  		.back{
+  			background-image: url("/diary/image/main_page.jpg");
+  			background-size :100%;
+  			background-repeat : no-repeat;
+  			background-position: center center;
+  		}
+  		.btn_head{
+  			text-align:right;
+  		}
+   		nav {
+  			display: inline-block;
+  			vertical-align: middle;
+  			float: right;
+		} 
+ 		ul {
+			  list-style: none;
+			  margin: 0;
+			  padding: 0;
+			  display: flex;
+			  float: right;
+			}  
+			
+		.q{
 			display: flex;
 			flex-direction: column;
-			height: 200px;
-			background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+			height: 150px;
 			text-align:center;
 		}
-		
-		.ss {
-			text-align:right;
-			color : black;
-		}
-		.dd {
-			background-color: black;
-			background-size : 200%
-		}
-		.head {
-			text-align:center;
-		}
-		*{
-  		 	font-family: "Playpen Sans", cursive;
-  		  	font-family: "Bagel Fat One", system-ui;
-  		}
-  		.a {
-  			background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
-  			
-  		}
+
+			
 	</style>
 </head>
-<body>
+<body class="back">
 	<div class="container">
-		<div class="q">
-		<h1>&#129528;Diary&#129528;</h1>
-		</div>
-	<div>
-
-		<button class="btn btn-warning"><a href="/diary/logout.jsp">로그아웃</a></button>	
-		<button class="btn btn-warning"><a href="/diary/addDiaryForm.jsp">글쓰기</a></button>	
+		<div class="row">
+			<div class="col"></div>
+	<header class="q">
+	<h1 class="diary_center">&#129528;Diary&#129528;</h1>
+	<h1><button class="btn btn-warning"><a href="/diary/addDiaryForm.jsp">글쓰기</a></button>
 		<button class="btn btn-warning"><a href="/diary/diaryList.jsp">다이어리 리스트</a></button>
 		<button class="btn btn-warning"><a href="/diary/statsLunch.jsp">오늘점심뭐먹지?</a></button>
-		
-	</div>
-	
-	<h1 style="color: #F361DC" class="head">
-		<a href="./diary.jsp?targetYear=<%=tYear%>&targetMonth=<%=tMonth-1%>">PREV<<</a>
-		<%=tYear%>년 <%=tMonth+1%>월 
-		<a href="./diary.jsp?targetYear=<%=tYear%>&targetMonth=<%=tMonth+1%>">>>NEXT</a>
+		<button class="btn btn-warning"><a href="/diary/logout.jsp">로그아웃</a></button>
 	</h1>
+	</header>
+	 	
+
+	
+	<h1 style="color: black;"  class= "text-center">
+		<a href="./diary.jsp?targetYear=<%=tYear%>&targetMonth=<%=tMonth-1%>"><<</a>
+		<%=tYear%>년 <%=tMonth+1%>월 
+		<a href="./diary.jsp?targetYear=<%=tYear%>&targetMonth=<%=tMonth+1%>">>></a>
+	</h1>
+	
+	
+	<div class="ms-5">
+	<div class="ms-5">
+	<div class="ms-5">
+	<div class="ms-5">
+	<div class="ms-5">
+	<div class="ms-5">
 	
 	<!-- 요일 -->
 	<div class="sun yo date">S</div>
@@ -167,6 +195,8 @@
 	<div class="yo date">T</div>
 	<div class="yo date">F</div>
 	<div class="yo sat date">S</div>
+	
+	
 	
 
 	<!-- Date -->
@@ -216,5 +246,8 @@
 
 	</div>
 </div>	
+</div>
+</div>
+</div>
 </body>
 </html>
