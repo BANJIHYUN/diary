@@ -80,7 +80,7 @@
   		} */
   		*{
   		 font-family: "Playpen Sans", cursive;
-  		  font-family: "Bagel Fat One", system-ui;
+  		 font-family: "Bagel Fat One", system-ui;
   		}
 		/* 달력 */
 		.cell {	
@@ -148,7 +148,7 @@
 			  float: right;
 			}  
 			
-		.q{
+		.head{
 			display: flex;
 			flex-direction: column;
 			height: 150px;
@@ -162,7 +162,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col"></div>
-	<header class="q">
+	<header class="head">
 	<h1 class="diary_center">&#129528;Diary&#129528;</h1>
 	<h1><button class="btn btn-warning"><a href="/diary/addDiaryForm.jsp">글쓰기</a></button>
 		<button class="btn btn-warning"><a href="/diary/diaryList.jsp">다이어리 리스트</a></button>

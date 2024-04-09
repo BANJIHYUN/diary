@@ -38,8 +38,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet">
 	<style>
 		*{
-  			 font-family: 'NanumSquare', sans-serif;
-  			 font-weight: 800;
+  		 font-family: "Playpen Sans", cursive;
+  		  font-family: "Bagel Fat One", system-ui;
   		}
 		body{
 			background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
